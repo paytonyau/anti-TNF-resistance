@@ -1,25 +1,37 @@
+#### xCELL and CIBERSORT were using the web tools
+
+###MCP-Counter
 ## https://github.com/ebecht/MCPcounter
-##
-
-install.packages(c("devtools","curl")) ##Installs devtools and the MCPcounter dependancy 'curl'
+## Install  R devtools and MCPcounter dependancy 'curl'
+install.packages(c("devtools","curl")) 
 library(devtools)
-
+## Install the package
 install_github("ebecht/MCPcounter",ref="master", subdir="Source")
-
 library(MCPcounter)
+## Save the matrix
+expression <- read.csv("merged_batch_effect_corrected_matrix", header = TRUE, row.names = 1)
 
-expression <- read.csv("000A_matrix.csv", header = T, row.names = 1)
-
-## example
-MCPcounter.estimate(expression,
-                    featuresType=c("affy133P2_probesets","HUGO_symbols","ENTREZ_ID")[1],
-                    probesets=read.table(curl("http://raw.githubusercontent.com/ebecht/MCPcounter/master/Signatures/probesets.txt"),sep="\t",stringsAsFactors=FALSE,colClasses="character"),
-                    genes=read.table(curl("http://raw.githubusercontent.com/ebecht/MCPcounter/master/Signatures/genes.txt"),sep="\t",stringsAsFactors=FALSE,header=TRUE,colClasses="character",
-                                     check.names=FALSE)
-)
+#### example run
+# MCPcounter.estimate(expression,
+#                    featuresType=c("affy133P2_probesets","HUGO_symbols","ENTREZ_ID")[1],
+#                    probesets=read.table(curl("http://raw.githubusercontent.com/ebecht/MCPcounter/master/Signatures/probesets.txt"),
+#                                               sep="\t",stringsAsFactors=FALSE,colClasses="character"),
+#                    genes=read.table(curl("http://raw.githubusercontent.com/ebecht/MCPcounter/master/Signatures/genes.txt"),
+#                                           sep="\t",stringsAsFactors=FALSE,header=TRUE,colClasses="character", check.names=FALSE)
+# )
 #### end
 
-Estimates = MCPcounter.estimate(expression,featuresType="HUGO_symbols")
+# Run the program
+Estimates = MCPcounter.estimate(expression, featuresType = "HUGO_symbols")
+write.csv(Estimates, "MCPcounter_matrix.csv")
 
+###### EPIC
+### https://github.com/GfellerLab/EPIC
+devtools::install_github("GfellerLab/EPIC", build_vignettes=TRUE)
+## Install the package
+library(EPIC)
 
-heatmap(as.matrix(ExampleEstimates),col=colorRampPalette(c("blue","white","red"))(100)) 
+## Run the program
+Estimates <-  EPIC(expression)
+## Save the matrix
+write.csv(Estimates, "EPIC_matrix.csv")
