@@ -2,19 +2,23 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("sva")
 
+# Load sva package
 library(sva)
-
-sample.list = read.csv("Sample_list_filtered.csv", header = T)
+# Input the combined clinical information
+sample.list = read.csv("Sample_list_filtered.csv", header = TRUE)
 batch = sample.list$Batch
 
-df <- read.csv("....csv")
+# Input the merged matrix from five different datasets
+df <- read.csv("merged_matrix.csv")
 
-### null model
+### applying null model
 modcombat = model.matrix(~1,data=df)
-### Adjust for batch with combat function ## https://www.biostars.org/p/142914/
+### Adjust for batch with combat function 
+## Reference: https://www.biostars.org/p/142914/
 combat_edata = ComBat(dat=as.matrix(df), batch=batch, mod=modcombat, par.prior=TRUE, prior.plots=FALSE)
 combat_edata <- as.data.frame(t(combat_edata))
-write.csv(combat_edata, "A.csv")
+## Save the batch effect corrected matrix
+write.csv(combat_edata, "merged_batch_effect_corrected_matrix.csv")
 
 ## Plot figures
 pdf("Batch_effect_After_correction.pdf", 30, 10)
