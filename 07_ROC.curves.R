@@ -1,8 +1,9 @@
 library(tidyverse)
 library(pROC)
 
-ROCStatFunc <- function(dat, group, var,retype = c("threshold", "specificity", "sensitivity"),
-                        auc = T,youden = T, digit = 3){
+## create a function
+ROCStatFunc <- function(dat, group, var, retype = c("threshold", "specificity", "sensitivity"),
+                        auc = T, youden = T, digit = 4){
   subgroup <- levels(as.factor(dat[[group]]))
   subgroup1 <- paste0(subgroup[2], " vs ", subgroup[1])
   rocmodel <- roc(dat[[group]], dat[[var]])
@@ -42,17 +43,17 @@ data("aSAH")
 head(aSAH)
 dat <- read.csv("dat", header = T)
 
-### 计算outcome为结局变量的age的相关信息
+### Canculate the outcomes based on the age factor
 quiteROCFunc(aSAH, group = "outcome", var = "age")$result
 
 # Remove some NA values
 dat <- dat[!is.na(dat$INDUCTION_RESPONSE),]
 
-# 批量计算变量的ROC结果
-## 定义group
-Z10 <- read.csv("000B2_R_vs_NR_List.csv", header = T)
+# Calculate the ROC result for all the variables
+## define the groups
+Z10 <- read.csv("R_vs_NR_List.csv", header = T)
 
-df <- read.table("000B_R_vs_NR_matrix2.txt", header = T)
+df <- read.table("R_vs_NR_matrix2.txt", header = T)
 df <- t(df)
 df <- as.data.frame(df)
 multigroup <- colnames(df)[1:ncol(df)]
@@ -79,7 +80,8 @@ Z9 <- subset(Z0, Group.1 == "PRE.R" | Group.1 == "PRE.NR")
 library(pROC)
 X <- roc(Z6$GROUP1, Z6$V1287) # print the AUC (will contain the CI))
 
-pdf("NUM1_ROC.pdf", 4.75,4.75)
+## plot ROC
+pdf("ROC.pdf", 4.75,4.75)
 plot.roc(A1_UP_DN$GROUP1 ,A1_UP_DN$V1606,
          levels=c("IFN.PRE.NR", "IFN.PRE.R"),
              legacy.axes=TRUE,
