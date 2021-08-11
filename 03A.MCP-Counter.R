@@ -9,7 +9,7 @@ library(devtools)
 install_github("ebecht/MCPcounter",ref="master", subdir="Source")
 library(MCPcounter)
 ## Save the matrix
-expression <- read.csv("merged_batch_effect_corrected_matrix", header = TRUE, row.names = 1)
+expression = read.csv("merged_batch_effect_corrected_matrix", header = TRUE, row.names = 1)
 
 #### example run
 # MCPcounter.estimate(expression,
@@ -32,6 +32,6 @@ devtools::install_github("GfellerLab/EPIC", build_vignettes=TRUE)
 library(EPIC)
 
 ## Run the program
-Estimates <-  EPIC(expression)
+Estimates =  EPIC(expression)
 ## Save the matrix
 write.csv(Estimates, "EPIC_matrix.csv")
