@@ -1,7 +1,11 @@
 ## https://www.bioconductor.org/packages/devel/workflows/vignettes/maEndToEnd/inst/doc/MA-Workflow.html
 
+# install packages
+install::packages("limma")
+library("limma")
 
-library(limma)
+# input matrix
+Z2 = read.csv("matrix.csv", header = TRUE, rowname = 1)
 
 design_palmieri <- model.matrix(~ 0 + Z2$A) # Group
 colnames(design_palmieri)[1:2] <- c("IFN_Pre_NR", "IFN_Pre_R")
@@ -15,8 +19,9 @@ palmieri_fit <- eBayes(contrasts.fit(lmFit(combat_edata2,
                                         contrast_matrix))
 table <- topTable(palmieri_fit, number = Inf)
 
+install::packages("EnhancedVolcano")
 library(EnhancedVolcano)
-## Adjusted P-Value Plot
+## Adjusted P-Value Volcano Plot
 Volcan1<- EnhancedVolcano(table,
                           lab = row.names(table),
                           x = 'logFC',
@@ -52,15 +57,17 @@ rownames(exprset) <- exprset$Gene
 exprset <- exprset[,8:ncol(exprset)]
 
 #############
+## Creating Heatmap using pheatmap package
 library(pheatmap)
 library(RColorBrewer)
 
-# z-score calculation
+# Create a z_score loop function
 cal_z_score <- function(x){
   (x - mean(x)) / sd(x)
 }
-
+# z-score calculation
 data_subset <- t(apply(exprset, 1, cal_z_score))
+# some data re-formatting
 data_subset <- as.data.frame(data_subset)
 data_subset <- t(data_subset)
 data_subset <- as.data.frame(data_subset)
@@ -77,18 +84,19 @@ annotation_col<- annotation_col %>%
                          "Non-Resistance", as.character(Status)))
 rownames(annotation_col) <- Z2$GSM
 
-pdf("heatmap444.pdf",width = 25, height = 12.5)
+# Plot the heatmap using pdf format
+pdf("Heatmap.pdf",width = 25, height = 12.5)
 pheatmap(data_subset,
          # main = "Kasumi",
          color = colorRampPalette(c("navy", "white", "firebrick3"))(50),
          # color = display.brewer.pal(10, "RdBu"),
          clustering_method = "average", #average
-         annotation_col = annotation_col,
-         
+         annotation_col = annotation_col,   
 )
 dev.off()
 
 ###################
+## PCA analysis
 library(FactoMineR)
 library(factoextra)
 
@@ -100,6 +108,7 @@ pca <- PCA(data[,-ncol(data)], graph = FALSE)
 eig.val <- get_eigenvalue(pca)
 fviz_eig(pca, addlabels = TRUE, ylim = c(0, 100))
 
+# plot PCA
 pdf("pca_before.pdf",width = 8, height = 6)
 fviz_pca_ind(pca,
              geom.ind = "point", 
