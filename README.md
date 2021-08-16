@@ -24,4 +24,4 @@
 [09. Matched GO term calculation](https://github.com/paytonyau/anti-TNF-resistance/blob/main/09_LPS_Neutrophils_Groups_Comparsions.R)
 
 
-Detailed explanation can be found on the manuscript (currenly under review).
+Detailed explanation can be found on the manuscript(https://www.biorxiv.org/content/10.1101/2021.08.15.456400v1)
