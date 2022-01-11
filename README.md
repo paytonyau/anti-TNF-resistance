@@ -1,4 +1,4 @@
-### Hyperactive chemotaxis contributes to anti-TNFα treatment resistance in inflammatory bowel disease
+### Hyperactive neutrophil chemotaxis contributes to anti-TNFα treatment resistance in inflammatory bowel disease
 
 #### Table of Contents
 ##### A. IBD patients data with anti-TNFα treatment response ([GSE16879](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE16879), [GSE23597](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE23597), [GSE52746](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52746), [GSE73661](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE73661) & [GSE92415](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE92415))
@@ -24,4 +24,4 @@
 [09. Matched GO term calculation](https://github.com/paytonyau/anti-TNF-resistance/blob/main/09_LPS_Neutrophils_Groups_Comparsions.R)
 
 
-Detailed explanation can be found on the manuscript (https://www.biorxiv.org/content/10.1101/2021.08.15.456400v1)
+Detailed explanation can be found in the manuscript (https://doi.org/10.1111/jgh.15764)
