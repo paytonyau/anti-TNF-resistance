@@ -1,17 +1,25 @@
 library(tidyverse)
 library(pROC)
 
-## create a function
+## Define a function to perform ROC analysis and return results
 ROCStatFunc <- function(dat, group, var, retype = c("threshold", "specificity", "sensitivity"),
                         auc = T, youden = T, digit = 4){
+  # Split the groups into subgroups
   subgroup <- levels(as.factor(dat[[group]]))
   subgroup1 <- paste0(subgroup[2], " vs ", subgroup[1])
+
+  # Fit a ROC model to the data
   rocmodel <- roc(dat[[group]], dat[[var]])
+  # Calculate the threshold, specificity, and sensitivity
   other <- coords(rocmodel, "b", ret = retype)
   other <- round(other, digit)
+
+  # Check if AUC should be calculated
   if(auc == T){
     auc <- round(ci.auc(rocmodel),digit)
     auc <- paste0(auc[2],"(",auc[1],"-",auc[3],")")
+
+    # Check if Youden's index should be calculated  
     if(youden == T){
       abc <- coords(rocmodel, "b", ret = c("specificity", "sensitivity"))
       youdenres <- abc[1] + abc[2] - 1
@@ -34,6 +42,7 @@ ROCStatFunc <- function(dat, group, var, retype = c("threshold", "specificity", 
       names(result) <- c("group", "subgroup",retype)
     }
   }
+  # Return the result
   return(result)
 }
 

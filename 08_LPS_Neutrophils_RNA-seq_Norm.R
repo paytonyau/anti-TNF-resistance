@@ -1,5 +1,3 @@
-# https://ucdavis-bioinformatics-training.github.io/2018-June-RNA-Seq-Workshop/thursday/DE.html
-
 library(edgeR)
 clic <- read.csv("GSE145918_Clin.csv", header = T, row.names = 1)
 counts <- read.delim("GSE145918_raw_counts_2.txt", row.names = 1)
@@ -7,9 +5,6 @@ d0 <- DGEList(counts, group = clic$group)
 d0$samples
 
 ## Filter low-expressed genes
-## https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf
-## Users should also filter with count-per-million (CPM) rather than filtering on the
-# counts directly, as the latter does not account for differences in library sizes between samples.
 d <- filterByExpr(d0)
 d0 <- d0[d, , keep.lib.sizes=FALSE]
 dim(d0) # number of genes left
@@ -17,13 +12,11 @@ dim(d0) # number of genes left
 ##
 d <- d0
 
-######## 2. Preprocessing
-## https://www.biostars.org/p/319775/
-## https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/cpm
+#### 2. Preprocessing
 ## calcNormFactors doesn't normalize the data, 
 ## it just calculates normalization factors for use downstream.
-d0 <- calcNormFactors(d0) ## TMM, RLE or upperquartile, default TMM
-CPM <- cpm(d0, prior.count=3)#log2 transformation
+d0 <- calcNormFactors(d0) # TMM, RLE or upperquartile, default TMM
+CPM <- cpm(d0, prior.count=3) # log2 transformation
 logCPM <- log2(CPM + 1)
 write.csv(logCPM, "log2_CPM_Matrix.csv")
 

@@ -3,6 +3,7 @@
 
 # input clinical data
 sample.list = read.csv("....csv", header = TRUE, rowname = 1)
+
 # input matrix, the column order should be the same as the inputted clinical data
 comps = read.csv("matrix.csv", header = TRUE, rowname = 1)
 
@@ -20,5 +21,5 @@ comps$pval = apply(comps, 1, function(x) {
 library(reshape2)
 comps2 <- dcast(comps, Var2~Var1, value.var = "pval")
 
-#output result
+#output the result
 write.csv(comp2, "p_values.csv")

@@ -1,30 +1,30 @@
-install.packages("plot3D")
+## Load the plot3D library
 library("plot3D")
 
-## inport matrix
-A = read.csv("MCP.csv")
+## Import the matrix
+A <- read.csv("MCP.csv")
 
-## isolate the factors from the matrix
-x = A$B.cells
-y = A$Endothelial.cells
-z = A$Neutrophils
+## Isolate the factors from the matrix
+x <- A$B.cells
+y <- A$Endothelial.cells
+z <- A$Neutrophils
 
-# apply linear fit
+# Fit a linear model to the data
 fit <- lm(z ~ x + y)
 
-# predict values on regular xy grid
-grid.lines = 26
-x.pred = seq(min(x), max(x), length.out = grid.lines)
-y.pred = seq(min(y), max(y), length.out = grid.lines)
-xy = expand.grid( x = x.pred, y = y.pred)
-z.pred = matrix(predict(fit, newdata = xy), 
+# Predict values on a regular xy grid
+grid.lines <- 26
+x.pred <- seq(min(x), max(x), length.out = grid.lines)
+y.pred <- seq(min(y), max(y), length.out = grid.lines)
+xy <- expand.grid(x = x.pred, y = y.pred)
+z.pred <- matrix(predict(fit, newdata = xy), 
                  nrow = grid.lines, ncol = grid.lines)
 
-# predicted z-values, fitted points for droplines to surface
-fitpoints = predict(fit) 
+# Predicted z-values, fitted points for drop lines to the surface
+fitpoints <- predict(fit) 
 
-# plot the result, pdf() function can be applied here if needed
-scatter3D(z = z, x = x , y = y, 
+# Plot the result
+scatter3D(x = x, y = y, z = z, 
           pch = 16, cex = 0.5, theta = 45, phi = -10, ticktype = "detailed",
           xlab = "Endothelial Cells", ylab = "B Cells", zlab = "Neutrophils", 
           clab = "Neutrophils", 
