@@ -17,6 +17,8 @@
 
 [07. ROC loop](https://github.com/paytonyau/anti-TNF-resistance/blob/main/07_ROC.curves.R)
 
+[*Normalised matrix](https://github.com/paytonyau/anti-TNF-resistance/blob/main/matrix.7z)
+
 ##### B. Expermintal data on LPS - Neutrophils ([GSE145918](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE145918))
 
 [08. RNA-seq data normalisation](https://github.com/paytonyau/anti-TNF-resistance/blob/main/08_LPS_Neutrophils_RNA-seq_Norm.R)
