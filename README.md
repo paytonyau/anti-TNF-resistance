@@ -30,4 +30,5 @@
 
 
 Detailed explanation can be found in the manuscript below
+
 Yau, Tung On, et al. [Hyperactive neutrophil chemotaxis contributes to anti‐tumor necrosis factor‐α treatment resistance in inflammatory bowel disease.](https://doi.org/10.1111/jgh.15764) Journal of Gastroenterology and Hepatology 37.3 (2022): 531-541.
