@@ -1,3 +1,4 @@
+
 ### Hyperactive neutrophil chemotaxis contributes to anti-tumor necrosis factor-α treatment resistance in inflammatory bowel disease
 
 #### Table of contents
@@ -7,7 +8,7 @@
 
 [02. Data integration and batch effect correction](https://github.com/paytonyau/anti-TNF-resistance/blob/main/02.ComBat.SVA.R)
 
-[03. In silico flow cytometry analysis](https://github.com/paytonyau/anti-TNF-resistance/blob/main/03A.MCP-Counter.R)
+[03. In silico flow cytometry analysis](https://github.com/paytonyau/anti-TNF-resistance/blob/main/03.cellular_deconvolution.R)
 
 [04. t-test Loop](https://github.com/paytonyau/anti-TNF-resistance/blob/main/04_T-Test.R)
 
@@ -17,13 +18,16 @@
 
 [07. ROC loop](https://github.com/paytonyau/anti-TNF-resistance/blob/main/07_ROC.curves.R)
 
-[*Normalised matrix](https://github.com/paytonyau/anti-TNF-resistance/blob/main/matrix.7z)
+[*Normalised matrix](https://github.com/paytonyau/anti-TNF-resistance/blob/main/IBD_matrix.7z)
 
-##### B. Expermintal data on LPS - Neutrophils ([GSE145918](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE145918))
+[*MetaScape Result](https://github.com/paytonyau/anti-TNF-resistance/blob/main/IBD_MetaScape_outputs.zip)
+
+##### B. Expermintal data on lipopolysaccharide (LPS)-induced Neutrophils ([GSE145918](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE145918))
 
 [08. RNA-seq data normalisation](https://github.com/paytonyau/anti-TNF-resistance/blob/main/08_LPS_Neutrophils_RNA-seq_Norm.R)
 
 [09. Matched GO term calculation](https://github.com/paytonyau/anti-TNF-resistance/blob/main/09_LPS_Neutrophils_Groups_Comparsions.R)
 
 
-Detailed explanation can be found in the manuscript (https://doi.org/10.1111/jgh.15764)
+Detailed explanation can be found in the manuscript below
+Yau, Tung On, et al. [Hyperactive neutrophil chemotaxis contributes to anti‐tumor necrosis factor‐α treatment resistance in inflammatory bowel disease.](https://doi.org/10.1111/jgh.15764) Journal of Gastroenterology and Hepatology 37.3 (2022): 531-541.
